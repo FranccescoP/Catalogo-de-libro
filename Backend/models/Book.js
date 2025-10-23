@@ -20,16 +20,16 @@ const Book = sequelize.define('Book', {
     allowNull: false, 
     unique: true, 
     validate: {
-      len: [10, 13] // Validación de longitud, ya sea ISBN-10 o ISBN-13
+      len: [10, 13] // Validación para ISBN-10 o ISBN-13
     }
   },
   publishedYear: {
     type: DataTypes.INTEGER,
-    allowNull: true, // Año de publicación es opcional
+    allowNull: true,
     validate: {
       isInt: true, 
       min: 1000, 
-      max: new Date().getFullYear() 
+      max: new Date().getFullYear() // El año no puede ser en el futuro
     }
   },
   genre: {
@@ -37,9 +37,8 @@ const Book = sequelize.define('Book', {
     allowNull: true 
   }
 }, {
-  // Opciones adicionales para el modelo
-  tableName: 'books', // Nombre de la tabla en la base de datos
-  timestamps: false // Si no quieres que Sequelize agregue campos de fechas automáticas (createdAt, updatedAt)
+  tableName: 'books', // Nombre exacto de la tabla
+  timestamps: false // No crea campos createdAt y updatedAt
 });
 
 module.exports = Book;
